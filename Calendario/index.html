@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calendario</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a84ff" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="icons/icon-192.png" alt="logo" />
+      <div>
+        <h1>Calendario</h1>
+        <small>Curso 2025–2026</small>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="auth-screen" class="screen">
+      <div class="card">
+        <h2>Crear cuenta / Iniciar sesión</h2>
+        <input id="display" placeholder="Nombre a mostrar (opcional)" />
+        <input id="username" placeholder="Usuario" />
+        <input id="password" placeholder="Contraseña" type="password" />
+        <label>Rol:
+          <select id="role">
+            <option value="alumno">Alumno</option>
+            <option value="profesor">Profesor</option>
+          </select>
+        </label>
+        <div class="row">
+          <button id="signup-btn">Crear cuenta</button>
+          <button id="login-btn">Iniciar sesión</button>
+        </div>
+        <div id="auth-msg" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="main-screen" class="screen hidden">
+      <nav class="tabs">
+        <button data-tab="calendar" class="active">Calendario</button>
+        <button data-tab="classes">Clases</button>
+        <button data-tab="exams">Exámenes</button>
+        <button data-tab="groups">Grupos</button>
+        <button data-tab="settings">Ajustes</button>
+      </nav>
+
+      <div id="tab-calendar" class="tab active">
+        <div class="toolbar">
+          <div>
+            <label>Clase:
+              <select id="select-class"><option value="">-- seleccionar --</option></select>
+            </label>
+            <button id="manage-classes">Gestionar clases</button>
+          </div>
+          <div>
+            <button id="prev-month">‹</button>
+            <span id="month-title"></span>
+            <button id="next-month">›</button>
+          </div>
+        </div>
+        <div id="calendar" class="calendar-grid"></div>
+      </div>
+
+      <div id="tab-classes" class="tab">
+        <div class="card">
+          <h3>Crear clase (profesor)</h3>
+          <input id="class-title" placeholder="Título (ej. Matemáticas)" />
+          <input id="class-code" placeholder="Código (único)" />
+          <button id="create-class-btn">Crear clase</button>
+        </div>
+
+        <div class="card">
+          <h3>Unirse a clase</h3>
+          <input id="join-code" placeholder="Código de clase" />
+          <button id="join-class-btn">Unirse</button>
+        </div>
+
+        <div class="card">
+          <h3>Clases</h3>
+          <div id="class-list"></div>
+        </div>
+      </div>
+
+      <div id="tab-exams" class="tab">
+        <div class="card">
+          <h3>Crear examen</h3>
+          <input id="exam-title" placeholder="Título del examen" />
+          <input id="exam-date" type="datetime-local" />
+          <select id="exam-class">
+            <option value="">Personal (sin clase)</option>
+          </select>
+          <label>Recordar X días antes:
+            <input id="exam-remind" type="number" min="0" max="30" value="1" />
+          </label>
+          <button id="create-exam-btn">Crear examen</button>
+        </div>
+
+        <div class="card">
+          <h3>Próximos exámenes</h3>
+          <div id="exams-list"></div>
+        </div>
+      </div>
+
+      <div id="tab-groups" class="tab">
+        <div class="card">
+          <h3>Crear grupo</h3>
+          <input id="group-title" placeholder="Nombre del grupo" />
+          <select id="group-class"><option value="">Selecciona clase (opcional)</option></select>
+          <button id="create-group-btn">Crear grupo</button>
+        </div>
+
+        <div class="card">
+          <h3>Grupos</h3>
+          <div id="groups-list"></div>
+        </div>
+      </div>
+
+      <div id="tab-settings" class="tab">
+        <div class="card">
+          <h3>Cuenta</h3>
+          <div id="account-info"></div>
+          <button id="logout-btn">Cerrar sesión</button>
+        </div>
+
+        <div class="card">
+          <h3>Notificaciones</h3>
+          <button id="request-notif">Pedir permiso de notificaciones</button>
+          <div class="note">En iOS Safari las notificaciones por Service Worker están limitadas; funcionarán mejor en Android/Chrome.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small></small>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
